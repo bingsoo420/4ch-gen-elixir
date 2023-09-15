@@ -7,7 +7,7 @@ defmodule ChGenElixir do
   Parses a string and returns a map of general threads.
 
   ## Examples
-      iex> ChGenElixir.parse_general(g)
+      iex> ChGenElixir.parse_general(:g)
       %{
        "wdg" => "https://boards.4chan.org/g/thread/123456789",
       }
