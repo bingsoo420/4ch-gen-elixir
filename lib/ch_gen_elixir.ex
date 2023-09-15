@@ -2,17 +2,6 @@ defmodule ChGenElixir do
   @moduledoc """
   Documentation for `ChGenElixir`.
   """
-
-  @doc """
-  Parses a string and returns a map of general threads.
-
-  ## Examples
-      iex> ChGenElixir.parse_general(:g)
-      %{
-       "wdg" => "https://boards.4chan.org/g/thread/123456789",
-      }
-
-  """
   @general_re ~r/^\/(\w+)\//
   def parse_general(binary, board) do
     binary
@@ -34,6 +23,16 @@ defmodule ChGenElixir do
     end)
   end
 
+  @doc """
+  Parses a string and returns a map of general threads.
+
+  ## Examples
+      iex> ChGenElixir.parse_general(:g)
+      %{
+       "wdg" => "https://boards.4chan.org/g/thread/123456789",
+      }
+
+  """
   def parse_general(board) do
     HTTPoison.get!("https://a.4cdn.org/#{board}/catalog.json", [], hackney: [pool: false])
     |> Map.get(:body)
