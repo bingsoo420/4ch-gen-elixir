@@ -34,9 +34,15 @@ defmodule ChGenElixir do
 
   """
   def parse_general(board) do
-    HTTPoison.get!("https://a.4cdn.org/#{board}/catalog.json", [], hackney: [pool: false])
-    |> Map.get(:body)
-    |> Jason.decode!(keys: :atoms)
-    |> parse_general(board)
+    case HTTPoison.get("https://a.4cdn.org/#{board}/catalog.json", [], hackney: [pool: false]) do
+      {:ok, %{body: body}} ->
+        Jason.decode!(body, keys: :atoms) |> parse_general(board)
+
+      {:error, %{reason: reason}} ->
+        IO.puts("Error: #{reason}")
+
+      _ ->
+        IO.puts("Unknown error")
+    end
   end
 end
