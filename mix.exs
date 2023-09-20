@@ -4,6 +4,7 @@ defmodule ChGenElixir.MixProject do
   def project do
     [
       app: :ch_gen_elixir,
+      escript: escript_config(),
       version: "0.1.0",
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
@@ -24,5 +25,9 @@ defmodule ChGenElixir.MixProject do
       {:jason, "~> 1.4"},
       {:httpoison, "~> 1.8"}
     ]
+  end
+
+  defp escript_config do
+    [main_module: Main]
   end
 end
